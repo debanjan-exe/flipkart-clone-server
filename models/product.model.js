@@ -1,8 +1,23 @@
 import mongoose from "mongoose";
 
-const ProductSchema = new mongoose.Schema(
+const VariationSchema = new mongoose.Schema(
     {
         name: {
+            type: String,
+        },
+        price: {
+            type: Number,
+        },
+        img: {
+            type: String,
+        },
+    },
+    { timestamps: true }
+);
+
+const ProductSchema = new mongoose.Schema(
+    {
+        title: {
             type: String,
             required: true,
         },
@@ -14,9 +29,9 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        price: {
-            type: Number,
-            required: true,
+        variations: {
+            type: [VariationSchema],
+            default: [],
         },
     },
     { timestamps: true }

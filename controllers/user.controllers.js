@@ -59,7 +59,7 @@ export const addToCart = async (req, res, next) => {
     const productId = req.params.productId;
     try {
         await User.findByIdAndUpdate(id, {
-            $addToSet: { products: productId },
+            $addToSet: { cart: productId },
         });
         res.status(200).json("Added to cart");
     } catch (err) {
@@ -72,7 +72,7 @@ export const removeFromCart = async (req, res, next) => {
     const productId = req.params.productId;
     try {
         await User.findByIdAndUpdate(id, {
-            $pull: { products: productId },
+            $pull: { cart: productId },
         });
         res.status(200).json("Removed from cart");
     } catch (err) {

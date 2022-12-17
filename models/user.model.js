@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema(
             default:
                 "https://res.cloudinary.com/debanjan/image/upload/v1645795943/account_vrj23k.png",
         },
+        cart: {
+            type: [String],
+            default: [],
+        },
         products: {
             type: [String],
             default: [],
