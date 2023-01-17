@@ -5,6 +5,7 @@ export const verifyToken = (req, res, next) => {
     // const token = req.headers.authorization;
     if (!req.headers.authorization)
         return next(createError(401, "You are not authenticated !"));
+
     const token = req.headers.authorization.split(" ")[1];
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {

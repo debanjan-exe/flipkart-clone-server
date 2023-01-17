@@ -7,13 +7,16 @@ import userRoutes from "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import morgan from "morgan";
 
 const app = express();
 
 app.use(cors());
+app.use(morgan('tiny'));
 
 const connect = () => {
     mongoose
+        .set('strictQuery', true)
         .connect(process.env.MONGO)
         .then(() => {
             console.log("DB is connected !");
@@ -25,6 +28,7 @@ const connect = () => {
 
 app.use(cookieParser());
 app.use(express.json());
+
 
 app.get("/", (req, res) => {
     res.send("Server is connected !");

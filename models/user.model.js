@@ -1,5 +1,15 @@
 import mongoose from "mongoose";
 
+const CartSchema = new mongoose.Schema({
+    product: {
+        type: [mongoose.Types.ObjectId],
+    },
+    quantity: {
+        type: Number,
+        default: 1,
+    }
+});
+
 const UserSchema = new mongoose.Schema(
     {
         name: {
@@ -15,17 +25,8 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        userImg: {
-            type: String,
-            default:
-                "https://res.cloudinary.com/debanjan/image/upload/v1645795943/account_vrj23k.png",
-        },
         cart: {
-            type: [String],
-            default: [],
-        },
-        products: {
-            type: [String],
+            type: [CartSchema],
             default: [],
         },
     },

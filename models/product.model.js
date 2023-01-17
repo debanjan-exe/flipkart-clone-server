@@ -1,27 +1,22 @@
 import mongoose from "mongoose";
 
-const VariationSchema = new mongoose.Schema(
+const RatingReviewSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
-        },
-        price: {
+        rating: {
             type: Number,
+            required: true,
+            max: 5,
         },
-        img: {
+        review: {
             type: String,
+            required: true,
         },
-    },
-    { timestamps: true }
+    }
 );
 
 const ProductSchema = new mongoose.Schema(
     {
-        title: {
-            type: String,
-            required: true,
-        },
-        desc: {
+        sellerId: {
             type: String,
             required: true,
         },
@@ -29,12 +24,34 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        variations: {
-            type: [VariationSchema],
-            default: [],
+        title: {
+            type: String,
+            required: true,
         },
+        imgUrl: {
+            type: [String],
+            default: []
+        },
+        desc: {
+            type: String,
+            required: true,
+        },
+        price: {
+            type: Number,
+            required: true,
+        },
+        rating: {
+            type: [RatingReviewSchema],
+            default: []
+        },
+        availability: {
+            type: String,
+            enum: ["AVAILABLE", "OUT_OF_STOCK"],
+            default: "AVAILABLE"
+        }
+
     },
     { timestamps: true }
 );
 
-export default mongoose.model("Product", ProductSchema);
+export default mongoose.model("Product", ProductSchema)
